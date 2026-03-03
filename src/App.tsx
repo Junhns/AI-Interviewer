@@ -57,6 +57,7 @@ const styles = `
 
   html, body, #root {
     height: 100%;
+    width: 100%;
     background: var(--bg);
     color: var(--text);
     font-family: var(--font-display);
@@ -83,12 +84,20 @@ const styles = `
     align-items: center;
     justify-content: center;
     padding: 48px 20px;
+    width: 100%;
+  }
+  .center-col {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   /* HEADER */
   .header {
     width: 100%;
-    max-width: 700px;
+    max-width: 520px;
     margin-bottom: 48px;
     display: flex;
     align-items: center;
@@ -127,6 +136,7 @@ const styles = `
     width: 100%;
     max-width: 520px;
     animation: fadeUp 0.5s ease forwards;
+    margin: 0 auto;
   }
 
   @keyframes fadeUp {
@@ -143,6 +153,7 @@ const styles = `
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-align: center;
   }
 
   .setup-sub {
@@ -151,6 +162,7 @@ const styles = `
     color: var(--text-dim);
     letter-spacing: 0.05em;
     margin-bottom: 40px;
+    text-align: center;
   }
 
   .field {
@@ -514,6 +526,7 @@ export default function App() {
     <>
       <style>{styles}</style>
       <div className="app">
+        <div className="center-col"></div>
         <div className="header">
           <div className="logo-mark">⚡</div>
           <span className="logo-text">InterviewAI</span>
