@@ -138,6 +138,8 @@ export default function App() {
           </div>
         ))}
       </div>
+      
+      {loading && <div style={{ color: "#888" }}>Hmm...</div>}
 
       <textarea
         value={input}
