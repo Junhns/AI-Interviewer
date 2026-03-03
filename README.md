@@ -9,9 +9,13 @@ An AI-powered mock interview app that asks real interview questions and gives st
 - Final overall assessment at the end
 
 ## Tech Stack
-- React + TypeScript
-- Vite
+- React
+- TypeScript
 - Claude API (Anthropic)
+- CSS
+
+## Screenshots
+![AI Interview Coach](public/screenshot.png)
 
 ## Setup
 
