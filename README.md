@@ -15,7 +15,9 @@ An AI-powered mock interview app that asks real interview questions and gives st
 - CSS
 
 ## Screenshots
-![AI Interview Coach](public/screenshot.png)
+<img width="850" height="722" alt="image" src="https://github.com/user-attachments/assets/b7024e82-3407-4b11-9f44-58b1bf6346ad" />
+<img width="963" height="913" alt="image" src="https://github.com/user-attachments/assets/0f1a3866-695a-4c8f-8263-f58e7c08a904" />
+
 
 ## Setup
 
