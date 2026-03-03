@@ -132,7 +132,7 @@ export default function App() {
             whiteSpace: "pre-wrap"
           }}>
             <div style={{ fontSize: 11, opacity: 0.5, marginBottom: 6 }}>
-              {m.role === "assistant" ? "🤖 Interviewer" : "🧑 You"}
+              {m.role === "assistant" ? "🤖 Interviewer" : "🙂 You"}
             </div>
             {m.content}
           </div>
