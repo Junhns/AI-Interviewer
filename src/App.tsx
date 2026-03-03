@@ -74,17 +74,6 @@ const styles = `
     z-index: 0;
   }
 
-  .grid-bg {
-    position: fixed;
-    inset: 0;
-    background-image: 
-      linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
   .app {
     position: relative;
     z-index: 1;
@@ -92,6 +81,7 @@ const styles = `
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 48px 20px;
   }
 
@@ -523,7 +513,6 @@ export default function App() {
   return (
     <>
       <style>{styles}</style>
-      <div className="grid-bg" />
       <div className="app">
         <div className="header">
           <div className="logo-mark">⚡</div>
