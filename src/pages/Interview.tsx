@@ -78,11 +78,10 @@ const styles = `
   .app {
     position: relative;
     z-index: 1;
-    min-height: 100vh;
+    min-height: calc(100vh - 57px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 48px 20px;
     width: 100%;
   }
@@ -526,13 +525,6 @@ export default function Interview() {
     <>
       <style>{styles}</style>
       <div className="app">
-        <div className="center-col"></div>
-        <div className="header">
-          <div className="logo-mark">⚡</div>
-          <span className="logo-text">InterviewAI</span>
-          <div className="header-line" />
-        </div>
-
         {screen === "setup" ? (
           <div className="setup">
             <h1 className="setup-title">Practice.<br />Get better.<br />Get hired.</h1>
