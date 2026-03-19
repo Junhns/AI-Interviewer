@@ -13,7 +13,7 @@ After each answer, give feedback in this exact structure:
 
 3. **What you did right** — Acknowledge anything genuinely good about their answer, even if small.
 
-4. **What a strong answer looks like** — Give a clear example of what should have been said, with bullet points and concrete examples.
+4. **What a strong answer looks like** — Give a clear example of what should have been said, with bullet points and concrete examples. Also include what they could have said in terms of though process.
 
 5. **What to study** — List specific topics, concepts, or skills they need to work on before a real interview. When appropriate give authentic websites or manuals or videos that could help.
 
