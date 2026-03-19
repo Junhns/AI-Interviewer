@@ -1,3 +1,3 @@
 export default function Study() {
-  return <div style={{ color: "white", padding: 40 }}>Study page coming soon</div>;
+  return <h1 style={{ color: "red", fontSize: 40 }}>STUDY PAGE</h1>;
 }
