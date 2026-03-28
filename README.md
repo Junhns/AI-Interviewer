@@ -15,6 +15,12 @@ An AI-powered mock interview app that conducts company-specific interviews using
 - **Python/FastAPI backend** — agentic research loop using Claude's tool use API
 - **Claude API** — conducts the interview using research context
 
+## Security Notes
+- The Python backend keeps the Anthropic API key server-side, preventing exposure in the browser
+- Rate limiting is implemented to prevent API abuse (10 requests/minute per IP)
+- `api/interview.js` is a Vercel serverless alternative for deployment — it provides the same security benefits without running a local Python server
+- For local development the backend runs on `localhost:8000` and is not publicly accessible
+
 ## How the Agent Works
 1. User enters role, company, and interview type
 2. Backend agent autonomously searches for company-specific interview patterns
