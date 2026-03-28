@@ -1,35 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 
-const systemPrompt = (type: string, role: string) => `
-You are a senior engineer at a top tech company conducting a ${type} interview for a ${role} position.
-
-Begin with a brief, friendly greeting. Tell the candidate the format: 5 questions, feedback after each, and a final assessment at the end. Keep it short and professional. Then ask question 1.
-
-After each answer, give feedback in this exact structure:
-
-1. **What you didn't address** — List the key things that were missing from their answer. Be direct and specific.
-
-2. **Critique** — Explain why those gaps matter and how it would come across to a real interviewer. Be honest, not mean.
-
-3. **What you did right** — Acknowledge anything genuinely good about their answer, even if small.
-
-4. **What a strong answer looks like** — Give a clear example of what should have been said, with bullet points and concrete examples. Also include what they could have said in terms of though process.
-
-5. **What to study** — List specific topics, concepts, or skills they need to work on before a real interview. When appropriate give authentic websites or manuals or videos that could help.
-
-6. **Score: X/10**
-
-If someone says "I'm not sure" or guesses, don't penalize them for honesty — but still walk them through exactly what they should have known.
-
-Your tone is direct and honest but you genuinely want them to improve. Think of yourself as a mentor who doesn't waste time with fluff.
-
-Ask ONE question at a time. Give 5 questions total, then a final overall assessment.
-Start with simpler, foundational questions and gradually increase difficulty with each question.
-Question 1 should be something a junior developer could reasonably answer with some thought.
-Question 5 should be challenging even for experienced engineers, but nothing impossible or unfair.
-Start now.
-`;
-
 type Message = { role: "user" | "assistant"; content: string };
 type Screen = "setup" | "chat";
 
@@ -470,44 +440,44 @@ export default function Interview() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [company, setCompany] = useState("");
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
-  async function askClaude(history: Message[]) {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/interview", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": import.meta.env.VITE_ANTHROPIC_API_KEY,
-          "anthropic-version": "2023-06-01",
-        },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1024,
-          system: systemPrompt(interviewType, role || "Software Engineer"),
-          messages: history,
-        }),
-      });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error.message);
-      const reply = data.content[0].text as string;
-      const updated = [...history, { role: "assistant" as const, content: reply }];
-      setMessages(updated);
-    } catch (err) {
-      console.error(err);
-    }
-    setLoading(false);
+  async function askClaude(history: Message[], isFirstMessage: boolean = false) {
+  setLoading(true);
+  try {
+    const res = await fetch("http://localhost:8000/interview", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        messages: history,
+        interviewType,
+        role: role || "Software Engineer",
+        company,
+        isFirstMessage,
+      }),
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    const reply = data.content[0].text as string;
+    const updated = [...history, { role: "assistant" as const, content: reply }];
+    setMessages(updated);
+  } catch (err) {
+    console.error(err);
+  }
+  setLoading(false);
   }
 
   function startInterview() {
-    const initial: Message[] = [{ role: "user", content: "Start the interview now." }];
-    setMessages(initial);
-    setScreen("chat");
-    askClaude(initial);
+  const initial: Message[] = [{ role: "user", content: "Start the interview now." }];
+  setMessages(initial);
+  setScreen("chat");
+  askClaude(initial, true);
   }
 
   function sendAnswer() {
@@ -545,8 +515,16 @@ export default function Interview() {
               <input
                 value={role}
                 onChange={e => setRole(e.target.value)}
-                placeholder="e.g. Software Engineer at Google"
-                onKeyDown={e => e.key === "Enter" && startInterview()}
+                placeholder="e.g. Software Engineer"
+              />
+            </div>
+
+            <div className="field">
+              <label>Company (optional)</label>
+              <input
+                value={company}
+                onChange={e => setCompany(e.target.value)}
+                placeholder="e.g. Google, Amazon, Shopify"
               />
             </div>
 
